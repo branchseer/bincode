@@ -181,7 +181,7 @@ impl serde::ser::Error for crate::error::EncodeError {
 /// [Serialize]: https://docs.rs/serde/1/serde/trait.Serialize.html
 pub struct Compat<T>(pub T);
 
-impl<T> crate::Decode for Compat<T>
+impl<Ctx, T> crate::Decode<Ctx> for Compat<T>
 where
     T: serde::de::DeserializeOwned,
 {
@@ -190,7 +190,7 @@ where
         T::deserialize(serde_decoder).map(Compat)
     }
 }
-impl<'de, T> crate::BorrowDecode<'de> for Compat<T>
+impl<'de, T, Ctx> crate::BorrowDecode<'de, Ctx> for Compat<T>
 where
     T: serde::de::DeserializeOwned,
 {
@@ -242,7 +242,7 @@ where
 /// [Serialize]: https://docs.rs/serde/1/serde/trait.Serialize.html
 pub struct BorrowCompat<T>(pub T);
 
-impl<'de, T> crate::de::BorrowDecode<'de> for BorrowCompat<T>
+impl<'de, T, Ctx> crate::de::BorrowDecode<'de, Ctx> for BorrowCompat<T>
 where
     T: serde::de::Deserialize<'de>,
 {
