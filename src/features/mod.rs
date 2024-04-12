@@ -16,3 +16,12 @@ pub use self::derive::*;
 #[cfg(feature = "serde")]
 #[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 pub mod serde;
+
+#[cfg(feature = "index_vec")]
+mod index_vec;
+
+#[cfg(feature = "indexmap")]
+mod indexmap;
+
+#[cfg(feature = "compact_str")]
+mod compact_str;

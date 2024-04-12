@@ -34,6 +34,9 @@ derive = ["bincode_derive"]
 bincode_derive = { path = "derive", version = "2.0.0-rc.3", optional = true }
 serde = { version = "1.0", default-features = false, optional = true }
 unty = "0.0.3"
+index_vec = { version = "0.1.3", optional = true }
+indexmap = { version = "2.2.6", optional = true }
+compact_str = { version = "0.7.1", optional = true }
 
 # Used for tests
 [dev-dependencies]
