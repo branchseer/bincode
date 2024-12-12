@@ -19,7 +19,8 @@ where
     C: Config,
 {
     let reader = crate::de::read::SliceReader::new(slice);
-    let mut decoder = crate::de::DecoderImpl::new(reader, config, ());
+    let mut context = ();
+    let mut decoder = crate::de::DecoderImpl::new(reader, config, &mut context);
     let serde_decoder = SerdeDecoder {
         de: &mut decoder,
         pd: PhantomData,
@@ -37,7 +38,8 @@ where
     C: Config,
 {
     let reader = crate::de::read::SliceReader::new(slice);
-    let mut decoder = crate::de::DecoderImpl::new(reader, config, ());
+    let mut context = ();
+    let mut decoder = crate::de::DecoderImpl::new(reader, config,  &mut context);
     let serde_decoder = SerdeDecoder {
         de: &mut decoder,
         pd: PhantomData,
@@ -56,7 +58,8 @@ where
     C: Config,
 {
     let reader = crate::de::read::SliceReader::new(slice);
-    let mut decoder = crate::de::DecoderImpl::new(reader, config, ());
+    let mut context = ();
+    let mut decoder = crate::de::DecoderImpl::new(reader, config, &mut context);
     let serde_decoder = SerdeDecoder {
         de: &mut decoder,
         pd: PhantomData,

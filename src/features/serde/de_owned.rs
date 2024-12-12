@@ -20,7 +20,8 @@ where
     C: Config,
 {
     let reader = crate::de::read::SliceReader::new(slice);
-    let mut decoder = crate::de::DecoderImpl::new(reader, config, ());
+    let mut context = ();
+    let mut decoder = crate::de::DecoderImpl::new(reader, config, &mut context);
     let serde_decoder = SerdeDecoder { de: &mut decoder };
     let result = D::deserialize(serde_decoder)?;
     let bytes_read = slice.len() - decoder.reader().slice.len();
@@ -39,7 +40,8 @@ pub fn decode_from_std_read<D: DeserializeOwned, C: Config, R: std::io::Read>(
     config: C,
 ) -> Result<D, DecodeError> {
     let reader = crate::IoReader::new(src);
-    let mut decoder = crate::de::DecoderImpl::new(reader, config, ());
+    let mut context = ();
+    let mut decoder = crate::de::DecoderImpl::new(reader, config, &mut context);
     let serde_decoder = SerdeDecoder { de: &mut decoder };
     D::deserialize(serde_decoder)
 }
@@ -53,7 +55,8 @@ pub fn decode_from_reader<D: DeserializeOwned, R: Reader, C: Config>(
     reader: R,
     config: C,
 ) -> Result<D, DecodeError> {
-    let mut decoder = crate::de::DecoderImpl::<_, C, ()>::new(reader, config, ());
+    let mut context = ();
+    let mut decoder = crate::de::DecoderImpl::<_, C, ()>::new(reader, config, &mut context);
     let serde_decoder = SerdeDecoder { de: &mut decoder };
     D::deserialize(serde_decoder)
 }
